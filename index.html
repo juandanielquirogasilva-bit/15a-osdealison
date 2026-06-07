@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Mis XV Años - Alizon Alena</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #1a2456;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --blush: #f2e4d8;
+    --white: #fdfaf6;
+    --rose: #c97a8a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--navy);
+    overflow-x: hidden;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 580px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: hidden;
+    background: var(--navy);
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+  }
+
+  /* placeholder photo box */
+  .photo-placeholder {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #1a2456 0%, #2d3a7a 40%, #4a2060 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    color: rgba(255,255,255,0.3);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+  .photo-placeholder svg { width: 48px; opacity: .4; }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,14,40,0.92) 0%, rgba(10,14,40,0.3) 50%, transparent 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px 56px;
+    width: 100%;
+  }
+
+  .mis-xv {
+    font-family: 'Great Vibes', cursive;
+    font-size: 28px;
+    color: var(--gold-light);
+    letter-spacing: .05em;
+    margin-bottom: 4px;
+    opacity: 0;
+    animation: fadeUp .8s .3s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 46px;
+    color: #fff;
+    line-height: 1.1;
+    text-shadow: 0 2px 24px rgba(0,0,0,.5);
+    opacity: 0;
+    animation: fadeUp .9s .5s forwards;
+  }
+
+  .hero-date {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    letter-spacing: .25em;
+    color: var(--gold-light);
+    margin-top: 14px;
+    opacity: 0;
+    animation: fadeUp .8s .8s forwards;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    opacity: 0;
+    animation: fadeUp .6s 1.2s forwards;
+  }
+  .scroll-cue span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: .2em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+  .scroll-cue-arrow {
+    width: 20px; height: 20px;
+    border-right: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    transform: rotate(45deg);
+    animation: bounce 1.4s infinite;
+  }
+
+  /* gold divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 auto 32px;
+    width: 80%;
+  }
+  .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold)); }
+  .divider-line.rev { background: linear-gradient(to left, transparent, var(--gold)); }
+  .divider-diamond {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown-section {
+    background: linear-gradient(135deg, var(--navy) 0%, #2d3a7a 100%);
+    padding: 52px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .countdown-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(201,168,76,.15) 0%, transparent 70%);
+  }
+
+  .countdown-label {
+    font-family: 'Great Vibes', cursive;
+    font-size: 32px;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+  }
+
+  .countdown-sublabel {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: .25em;
+    color: rgba(255,255,255,.5);
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+  }
+
+  .time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .time-box {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(201,168,76,.4);
+    border-radius: 10px;
+    width: 72px; height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .3s;
+  }
+  .time-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,.05) 0%, transparent 50%);
+  }
+
+  .time-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: .2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .colon {
+    color: var(--gold);
+    font-size: 36px;
+    line-height: 72px;
+    font-weight: 300;
+    opacity: .7;
+  }
+
+  /* ── MESSAGE ── */
+  .message-section {
+    background: var(--blush);
+    padding: 56px 32px;
+    text-align: center;
+    position: relative;
+  }
+
+  .section-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 38px;
+    color: var(--navy);
+    margin-bottom: 24px;
+  }
+
+  .message-text {
+    font-size: 17px;
+    line-height: 1.9;
+    color: #3a3055;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* ── PHOTOS ── */
+  .photos-section {
+    background: var(--white);
+    padding: 52px 20px;
+    text-align: center;
+  }
+
+  .photos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .photo-card {
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, #e8ddf0, #d4c5e2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: rgba(90,70,120,.4);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: .1em;
+    border: 1px dashed rgba(90,70,120,.25);
+  }
+  .photo-card.wide {
+    grid-column: 1 / -1;
+    aspect-ratio: 16/9;
+  }
+  
+  img.photo-card {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    aspect-ratio: 3/4;
+    display: block;
+}
+
+img.photo-card.wide {
+    aspect-ratio: 16/9;
+}
+  .photo-card svg { width: 32px; opacity: .5; }
+
+  /* ── LOCATION ── */
+  .location-section {
+    background: var(--blush);
+    padding: 52px 24px;
+    text-align: center;
+  }
+
+  .pin-icon {
+    width: 56px;
+    margin: 0 auto 16px;
+  }
+
+  .location-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--navy);
+    font-weight: 300;
+    margin-bottom: 8px;
+  }
+
+  .location-address {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    letter-spacing: .1em;
+    font-weight: 500;
+    color: var(--rose);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .btn-map {
+    display: inline-block;
+    background: linear-gradient(135deg, #c97a8a, #a05570);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(160,85,112,.35);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-map:active { transform: scale(.97); }
+
+  /* ── DRESS CODE ── */
+  .dress-section {
+    background: #f9f1ea;
+    padding: 52px 24px;
+    text-align: center;
+  }
+
+  .dress-icons {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin: 28px 0;
+  }
+  .dress-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: .15em;
+    color: var(--navy);
+    text-transform: uppercase;
+  }
+  .dress-icon svg { width: 52px; }
+
+  .dress-colors {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .color-chip {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    border: 2px solid #fff;
+  }
+
+  /* ── CLOSING ── */
+  .closing-section {
+    background: linear-gradient(160deg, var(--navy) 0%, #2d3a7a 100%);
+    padding: 64px 32px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .closing-section::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(ellipse, rgba(201,168,76,.12) 0%, transparent 70%);
+  }
+
+  .closing-photo {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    margin: 28px 0;
+    background: linear-gradient(135deg, #2d3a7a, #4a2060);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    color: rgba(255,255,255,.25);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    border: 1px dashed rgba(255,255,255,.15);
+  }
+  .closing-photo svg { width: 40px; }
+
+  .closing-quote {
+    font-family: 'Great Vibes', cursive;
+    font-size: 44px;
+    color: var(--gold-light);
+    line-height: 1.2;
+    position: relative;
+  }
+
+  .closing-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    letter-spacing: .25em;
+    color: rgba(255,255,255,.5);
+    margin-top: 16px;
+    text-transform: uppercase;
+  }
+
+  /* footer */
+  footer {
+    background: #0e1230;
+    padding: 24px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: .15em;
+    color: rgba(255,255,255,.25);
+  }
+
+  /* animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%,100% { transform: rotate(45deg) translateY(0); }
+    50%      { transform: rotate(45deg) translateY(6px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <!-- Replace src with your photo -->
+  <!-- <img class="hero-img" src="foto-principal.jpg" alt="Alizon Alena"> -->
+  <img class="hero-img" src="imagen1.jpg" alt="Alizon Alena">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="mis-xv">Mis XV años</p>
+    <h1 class="hero-name">Alizon Alena<br>Vargas Laura</h1>
+    <p class="hero-date">13 · JUNIO · 2026 &nbsp;·&nbsp; 19:30 HRS</p>
+  </div>
+  <div class="scroll-cue">
+    <div class="scroll-cue-arrow"></div>
+  </div>
+</section>
+
+<!-- ── COUNTDOWN ── -->
+<section class="countdown-section" id="countdown-section">
+  <div class="divider" style="margin-bottom:0;margin-top:0;width:60%;"></div>
+  <p class="countdown-label" style="margin-top:16px">Faltan...</p>
+  <p class="countdown-sublabel">para mi gran celebración</p>
+
+  <div class="countdown-grid">
+    <div class="time-unit">
+      <div class="time-box" id="cd-days">00</div>
+      <div class="time-name">Días</div>
+    </div>
+    <div class="colon">:</div>
+    <div class="time-unit">
+      <div class="time-box" id="cd-hours">00</div>
+      <div class="time-name">Horas</div>
+    </div>
+    <div class="colon">:</div>
+    <div class="time-unit">
+      <div class="time-box" id="cd-mins">00</div>
+      <div class="time-name">Minutos</div>
+    </div>
+    <div class="colon">:</div>
+    <div class="time-unit">
+      <div class="time-box" id="cd-secs">00</div>
+      <div class="time-name">Segundos</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MESSAGE ── -->
+<section class="message-section reveal">
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line rev"></div></div>
+  <h2 class="section-title">Un mensaje especial</h2>
+  <p class="message-text">
+    Este será un día muy especial, en el cual quiero dar las gracias, primeramente a Dios por darme la vida. A mis padres, tíos, amigos y demás familiares, por verme crecer y acompañarme en esta etapa de mi vida.<br><br>
+    <em>Los días especiales siempre llegan, pero los inolvidables se vuelven únicos por las personas que forman parte de esos recuerdos.</em>
+  </p>
+  <div class="divider" style="margin-top:32px;margin-bottom:0"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line rev"></div></div>
+</section>
+
+<!-- ── PHOTOS ── -->
+<section class="photos-section reveal">
+  <h2 class="section-title">Mis momentos</h2>
+  <div class="photos-grid">
+    <img class="photo-card" src="imagen1.jpg" alt="Foto 1">
+    <img class="photo-card" src="imagen2.jpg" alt="Foto 2">
+    <img class="photo-card wide" src="imagenfinal.jpg" alt="Foto principal">
+    <img class="photo-card" src="imagen3.jpg" alt="Foto 3">
+    <img class="photo-card" src="imagen4.jpg" alt="Foto 4">
+  </div>
+</section>
+
+<!-- ── LOCATION ── -->
+<section class="location-section reveal">
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line rev"></div></div>
+  <h2 class="section-title">¿Dónde celebramos?</h2>
+
+  <svg class="pin-icon" viewBox="0 0 24 24" fill="none">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="var(--navy)" opacity=".15"/>
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="var(--navy)" stroke-width="1.5" fill="none"/>
+    <circle cx="12" cy="9" r="2.5" fill="var(--gold)"/>
+  </svg>
+
+  <p class="location-text">Ven y celebra en mi domicilio</p>
+  <p class="location-address">Calle Patujú y Santa Clara</p>
+
+  <a class="btn-map" href="https://maps.app.goo.gl/15V9yz6Qed5dum9FA?g_st=aw" target="_blank">
+    📍 Ver en mapa
+  </a>
+</section>
+
+<!-- ── DRESS CODE ── -->
+<section class="dress-section reveal">
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line rev"></div></div>
+  <h2 class="section-title">Código de vestimenta</h2>
+  <p style="font-size:15px;color:#555;font-style:italic;margin-bottom:4px">Formal / Elegante</p>
+
+  <div class="dress-icons">
+    <div class="dress-icon">
+      <svg viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 10 Q30 4 40 10 L44 30 L50 75 H10 L16 30 Z" fill="var(--navy)" opacity=".85"/>
+        <ellipse cx="30" cy="9" rx="7" ry="8" fill="var(--navy)" opacity=".6"/>
+      </svg>
+      DAMAS
+    </div>
+    <div class="dress-icon">
+      <svg viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="2" width="24" height="32" rx="4" fill="var(--navy)" opacity=".85"/>
+        <rect x="14" y="34" width="32" height="42" rx="3" fill="var(--navy)" opacity=".7"/>
+        <rect x="18" y="2" width="8" height="20" rx="2" fill="white" opacity=".3"/>
+        <circle cx="30" cy="14" r="2" fill="var(--gold)" opacity=".8"/>
+        <circle cx="30" cy="22" r="2" fill="var(--gold)" opacity=".8"/>
+      </svg>
+      CABALLEROS
+    </div>
+  </div>
+
+  <div class="dress-colors">
+    <div class="color-chip" style="background:#1a2456" title="Azul marino"></div>
+    <div class="color-chip" style="background:#c9a84c" title="Dorado"></div>
+    <div class="color-chip" style="background:#c97a8a" title="Rosa"></div>
+    <div class="color-chip" style="background:#7a5a9a" title="Lila"></div>
+    <div class="color-chip" style="background:#f5f0e8" title="Crema"></div>
+  </div>
+  <p style="margin-top:14px;font-size:13px;color:#888;font-family:'Montserrat',sans-serif;letter-spacing:.05em">
+    
+  </p>
+</section>
+
+<!-- ── CLOSING ── -->
+<section class="closing-section reveal">
+  <!-- Reemplaza por tu foto de cierre -->
+  <img class="hero-img" src="imagenfinal.jpg" alt="Alizon Alena">
+
+  <p class="closing-quote">¡Te esperamos!</p>
+  <p class="closing-sub">Alizon Alena · Mis XV Años · 13 Junio 2026</p>
+</section>
+
+<footer>
+  ALIZON ALENA VARGAS LAURA &nbsp;·&nbsp; MIS XV AÑOS &nbsp;·&nbsp; 2026
+</footer>
+
+<script>
+  // ── COUNTDOWN ──
+  const target = new Date('2026-06-13T19:30:00');
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const now  = new Date();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent  = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent  = '00';
+      document.getElementById('cd-secs').textContent  = '00';
+      document.querySelector('.countdown-label').textContent = '¡Hoy es el gran día! 🎉';
+      return;
+    }
+
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById('cd-days').textContent  = pad(days);
+    document.getElementById('cd-hours').textContent = pad(hours);
+    document.getElementById('cd-mins').textContent  = pad(mins);
+    document.getElementById('cd-secs').textContent  = pad(secs);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+
+  // ── SCROLL REVEAL ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('revealed');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

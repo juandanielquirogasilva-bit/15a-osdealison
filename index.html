@@ -480,6 +480,55 @@ img.photo-card.wide {
     opacity: 1;
     transform: translateY(0);
   }
+  
+.music-btn {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  background: rgba(20,20,40,0.92);
+  color: var(--gold-light);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  letter-spacing: .08em;
+  padding: 16px 28px;
+  border-radius: 50px;
+  border: 1px solid rgba(201,168,76,.4);
+  cursor: pointer;
+  animation: pulse 2s infinite;
+}
+}
+.volume-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: rgba(20, 20, 40, 0.92);
+  color: var(--gold-light);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  letter-spacing: .08em;
+  padding: 14px 24px;
+  border-radius: 50px;
+  border: 1px solid rgba(201,168,76,.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  z-index: 999;
+  transition: transform .5s ease, opacity .5s ease;
+  opacity: 0;
+  white-space: nowrap;
+}
+
+.volume-toast.show {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(201,168,76,.4); }
+  50%       { box-shadow: 0 4px 32px rgba(201,168,76,.8); }
+}
 </style>
 </head>
 <body>
@@ -618,6 +667,16 @@ img.photo-card.wide {
   <p class="closing-sub">Alizon Alena · Mis XV Años · 13 Junio 2026</p>
 </section>
 
+<audio id="bgMusic" loop>
+  <source src="cancion.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-btn" id="musicBtn" onclick="toggleMusic()">
+  🎵 Toca para escuchar la música
+</div>
+
+
+
 <footer>
   ALIZON ALENA VARGAS LAURA &nbsp;·&nbsp; MIS XV AÑOS &nbsp;·&nbsp; 2026
 </footer>
@@ -666,6 +725,30 @@ img.photo-card.wide {
   }, { threshold: 0.12 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  
+  const music = document.getElementById('bgMusic');
+
+function toggleMusic() {
+  music.play();
+  document.getElementById('musicBtn').style.display = 'none';
+}
+
+// Intenta reproducir automáticamente
+
+// Intenta reproducir automáticamente
+document.addEventListener('click', function startAuto() {
+  if (!playing) {
+    music.play().then(() => { 
+      playing = true;
+      // Mostrar notificación
+      const toast = document.getElementById('volumeToast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1500);
+    });
+  }
+  document.removeEventListener('click', startAuto);
+}, { once: true });
 </script>
 </body>
 </html>
+
